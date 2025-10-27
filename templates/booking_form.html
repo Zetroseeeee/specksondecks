@@ -19,11 +19,35 @@
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-                        url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=1200') center/cover;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                        url('/static/images/dj-overhead.jpg') center/cover;
             padding: 100px 20px;
             text-align: center;
             color: white;
+            position: relative;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            padding: 12px 30px;
+            background: transparent;
+            color: white;
+            text-decoration: none;
+            border: 2px solid white;
+            border-radius: 6px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9em;
+            transition: all 0.3s;
+        }
+
+        .back-button:hover {
+            background: white;
+            color: black;
+            transform: translateY(-2px);
         }
 
         .hero h1 {
@@ -373,6 +397,7 @@
 <body>
     <!-- Hero Section -->
     <div class="hero">
+        <a href="/" class="back-button">← Back</a>
         <h1>BOOK YOUR EVENT</h1>
         <p>Professional DJ services for unforgettable moments</p>
     </div>
@@ -658,8 +683,8 @@
                 const result = await response.json();
 
                 if (result.success) {
-                    showSuccess('Booking request submitted! Check your email.');
-                    setTimeout(() => window.location.href = '/thank-you', 2000);
+                    showSuccess('Booking request submitted successfully!');
+                    setTimeout(() => window.location.href = '/thank-you', 1500);
                 } else {
                     showError(result.error || 'Error submitting. Please try again.');
                     submitBtn.disabled = false;

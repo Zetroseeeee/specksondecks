@@ -18,6 +18,28 @@
             padding: 40px 20px;
         }
 
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 12px 30px;
+            background: #000000;
+            color: white;
+            text-decoration: none;
+            border: 2px solid #000000;
+            border-radius: 6px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9em;
+            transition: all 0.3s;
+        }
+
+        .back-button:hover {
+            background: white;
+            color: #000000;
+            transform: translateY(-2px);
+        }
+
         .header {
             max-width: 1400px;
             margin: 0 auto 50px;
@@ -25,6 +47,7 @@
             padding: 50px 60px;
             border-radius: 2px;
             box-shadow: 0 2px 40px rgba(0,0,0,0.1);
+            position: relative;
         }
 
         .header h1 {
@@ -304,6 +327,7 @@
 </head>
 <body>
     <div class="header">
+        <a href="/" class="back-button">← Back to Home</a>
         <h1>Dashboard</h1>
         <p>Manage your bookings and track your business</p>
     </div>

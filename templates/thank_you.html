@@ -102,6 +102,29 @@
             font-size: 1.1em;
         }
 
+        .back-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 40px;
+            background: #000000;
+            color: white;
+            text-decoration: none;
+            border: 2px solid #000000;
+            border-radius: 6px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.95em;
+            transition: all 0.3s;
+        }
+
+        .back-button:hover {
+            background: white;
+            color: #000000;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 60px 40px;
@@ -123,9 +146,9 @@
         <div class="highlight">
             <h3>What Happens Next</h3>
             <p>
-                <span class="checkmark">✓</span> Check your email for your custom quote<br>
-                <span class="checkmark">✓</span> We'll respond within 24 hours<br>
-                <span class="checkmark">✓</span> Once confirmed, you'll receive booking confirmation
+                <span class="checkmark">✓</span> We've received your booking request<br>
+                <span class="checkmark">✓</span> We'll contact you within 24 hours with your quote<br>
+                <span class="checkmark">✓</span> Once confirmed, you'll receive your booking confirmation
             </p>
         </div>
 
@@ -133,8 +156,10 @@
 
         <p style="margin-top: 40px;">
             <strong style="color: #000000;">Questions?</strong><br>
-            Reply to the quote email or give us a call.
+            Contact us and we'll get back to you right away.
         </p>
+
+        <a href="/" class="back-button">Back to Home</a>
 
         <div class="footer">
             <p><strong>SPECKS ON DECKS</strong></p>
