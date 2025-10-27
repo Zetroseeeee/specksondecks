@@ -1,6 +1,7 @@
 """
 Specks on Decks - Automated Booking System
 Flask web application for handling bookings, quotes, and tracking
+Version: 2.0 - Professional Visual Design
 """
 
 from flask import Flask, render_template, request, jsonify, redirect, url_for
