@@ -65,8 +65,8 @@ class EmailSystem:
         afterparty_note = ""
         if booking_data.get('has_afterparty'):
             afterparty_note = """
-            <div style="background-color: #fff3cd; padding: 15px; border-radius: 5px; margin-top: 20px;">
-                <strong>After Party Service Requested</strong><br>
+            <div style="background-color: #f5f5f5; padding: 20px; border-radius: 2px; margin-top: 20px; border-left: 4px solid #000000;">
+                <strong style="font-size: 1.1em; text-transform: uppercase; letter-spacing: 0.5px;">After Party Service Requested</strong><br><br>
                 Venue rental, setup & coordination until 3am<br>
                 <em>Custom quote will be provided via phone call</em>
             </div>
@@ -77,21 +77,28 @@ class EmailSystem:
         <html>
         <head>
             <style>
-                body {{ font-family: Arial, sans-serif; line-height: 1.6; color: #333; }}
-                .container {{ max-width: 600px; margin: 0 auto; padding: 20px; }}
-                .header {{ background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; border-radius: 10px; }}
-                .content {{ background: #f9f9f9; padding: 30px; margin-top: 20px; border-radius: 10px; }}
-                .quote-box {{ background: white; padding: 20px; border-left: 4px solid #667eea; margin: 20px 0; }}
-                .total {{ font-size: 24px; font-weight: bold; color: #667eea; }}
-                .footer {{ text-align: center; margin-top: 30px; color: #666; font-size: 14px; }}
-                ul {{ list-style: none; padding: 0; }}
-                li {{ padding: 8px 0; border-bottom: 1px solid #eee; }}
+                body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333; background: #f5f5f5; margin: 0; padding: 0; }}
+                .container {{ max-width: 600px; margin: 0 auto; padding: 0; }}
+                .header {{ background: #000000; color: white; padding: 50px 30px; text-align: center; }}
+                .header h1 {{ font-size: 2.5em; font-weight: 900; margin: 0 0 10px 0; letter-spacing: 2px; text-transform: uppercase; }}
+                .header p {{ font-size: 1.2em; font-weight: 300; margin: 0; }}
+                .content {{ background: #ffffff; padding: 40px 30px; }}
+                .quote-box {{ background: #fafafa; padding: 25px; border-left: 4px solid #000000; margin: 20px 0; border-radius: 2px; }}
+                .quote-box h3 {{ font-size: 1.3em; font-weight: 700; margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 1px; color: #000000; }}
+                .total {{ font-size: 2em; font-weight: 900; color: #000000; margin-top: 15px; }}
+                .footer {{ background: #0a0a0a; color: #999999; text-align: center; padding: 30px; font-size: 14px; }}
+                ul {{ list-style: none; padding: 0; margin: 0; }}
+                li {{ padding: 10px 0; border-bottom: 1px solid #e0e0e0; }}
+                li:last-child {{ border-bottom: none; }}
+                ol {{ padding-left: 20px; }}
+                ol li {{ border-bottom: none; padding: 5px 0; }}
+                hr {{ border: none; border-top: 2px solid #e0e0e0; margin: 20px 0; }}
             </style>
         </head>
         <body>
             <div class="container">
                 <div class="header">
-                    <h1>🎧 {self.business_name}</h1>
+                    <h1>{self.business_name.upper()}</h1>
                     <p>Your Custom DJ Quote</p>
                 </div>
 
@@ -144,8 +151,9 @@ class EmailSystem:
                 </div>
 
                 <div class="footer">
-                    <p>Booking ID: #{booking_id}</p>
-                    <p>&copy; 2025 {self.business_name}. All rights reserved.</p>
+                    <p><strong style="color: #ffffff;">{self.business_name.upper()}</strong></p>
+                    <p>Professional DJ Services</p>
+                    <p style="margin-top: 15px; font-size: 12px;">Booking ID: #{booking_id}</p>
                 </div>
             </div>
         </body>
@@ -156,32 +164,53 @@ class EmailSystem:
 
     def send_admin_notification(self, booking_data, booking_id):
         """Send notification to admin about new booking inquiry"""
-        subject = f"🔔 New Booking Inquiry #{booking_id}"
+        subject = f"New Booking Inquiry #{booking_id} - {self.business_name}"
 
         html_content = f"""
         <!DOCTYPE html>
         <html>
-        <body style="font-family: Arial, sans-serif;">
-            <h2>New Booking Inquiry!</h2>
+        <head>
+            <style>
+                body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 0; }}
+                .container {{ max-width: 600px; margin: 0 auto; }}
+                .header {{ background: #000000; color: white; padding: 40px 30px; text-align: center; }}
+                .header h1 {{ font-size: 1.8em; font-weight: 900; margin: 0; letter-spacing: 1px; text-transform: uppercase; }}
+                .content {{ background: #ffffff; padding: 30px; }}
+                .info-box {{ background: #fafafa; padding: 20px; border-left: 4px solid #000000; margin: 15px 0; }}
+                .info-box p {{ margin: 8px 0; line-height: 1.6; }}
+                .quote-total {{ font-size: 1.8em; font-weight: 900; color: #000000; margin: 20px 0; }}
+                .button {{ display: inline-block; padding: 15px 35px; background: #000000; color: white; text-decoration: none; border-radius: 2px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-top: 20px; }}
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="header">
+                    <h1>New Booking Inquiry</h1>
+                </div>
+                <div class="content">
+                    <div class="info-box">
+                        <p><strong>CLIENT INFORMATION</strong></p>
+                        <p><strong>Name:</strong> {booking_data['client_name']}</p>
+                        <p><strong>Email:</strong> {booking_data['client_email']}</p>
+                        <p><strong>Phone:</strong> {booking_data.get('client_phone', 'Not provided')}</p>
+                    </div>
 
-            <p><strong>Client:</strong> {booking_data['client_name']}</p>
-            <p><strong>Email:</strong> {booking_data['client_email']}</p>
-            <p><strong>Phone:</strong> {booking_data.get('client_phone', 'Not provided')}</p>
+                    <div class="info-box">
+                        <p><strong>EVENT DETAILS</strong></p>
+                        <p><strong>Type:</strong> {booking_data['event_type']}</p>
+                        <p><strong>Date:</strong> {booking_data['event_date']}</p>
+                        <p><strong>Time:</strong> {booking_data['event_time']}</p>
+                        <p><strong>Location:</strong> {booking_data['location']}</p>
+                        <p><strong>Guests:</strong> {booking_data['guest_count']}</p>
+                    </div>
 
-            <hr>
+                    <div class="quote-total">Quote: £{booking_data['total_quote']:.2f}</div>
 
-            <p><strong>Event:</strong> {booking_data['event_type']}</p>
-            <p><strong>Date:</strong> {booking_data['event_date']} at {booking_data['event_time']}</p>
-            <p><strong>Location:</strong> {booking_data['location']}</p>
-            <p><strong>Guests:</strong> {booking_data['guest_count']}</p>
+                    <p style="color: #666; margin: 20px 0;">Quote email has been automatically sent to the client.</p>
 
-            <hr>
-
-            <h3>Quote: £{booking_data['total_quote']:.2f}</h3>
-
-            <p>Quote email has been automatically sent to the client.</p>
-
-            <p><a href="http://localhost:5000/booking/{booking_id}">View in Dashboard</a></p>
+                    <a href="https://specksondecks.onrender.com/dashboard" class="button">View in Dashboard</a>
+                </div>
+            </div>
         </body>
         </html>
         """
@@ -190,38 +219,61 @@ class EmailSystem:
 
     def send_confirmation_email(self, booking):
         """Send booking confirmation email"""
-        subject = f"Booking Confirmed! 🎉 - {self.business_name}"
+        subject = f"Booking Confirmed - {self.business_name}"
 
         html_content = f"""
         <!DOCTYPE html>
         <html>
-        <body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; border-radius: 10px;">
-                <h1>🎉 Booking Confirmed!</h1>
-            </div>
-
-            <div style="padding: 30px;">
-                <p>Hi {booking['client_name']},</p>
-
-                <p>Great news! Your booking with {self.business_name} is confirmed!</p>
-
-                <div style="background: #f9f9f9; padding: 20px; border-radius: 10px; margin: 20px 0;">
-                    <h3>Event Details</h3>
-                    <p><strong>Date:</strong> {booking['event_date']}</p>
-                    <p><strong>Time:</strong> {booking['event_time']}</p>
-                    <p><strong>Location:</strong> {booking['location']}</p>
+        <head>
+            <style>
+                body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 0; }}
+                .container {{ max-width: 600px; margin: 0 auto; }}
+                .header {{ background: #000000; color: white; padding: 50px 30px; text-align: center; }}
+                .header h1 {{ font-size: 2.5em; font-weight: 900; margin: 0 0 10px 0; letter-spacing: 2px; text-transform: uppercase; }}
+                .header p {{ font-size: 1.2em; font-weight: 300; margin: 0; }}
+                .content {{ background: #ffffff; padding: 40px 30px; }}
+                .info-box {{ background: #fafafa; padding: 25px; border-left: 4px solid #000000; margin: 20px 0; border-radius: 2px; }}
+                .info-box h3 {{ font-size: 1.3em; font-weight: 700; margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 1px; }}
+                .info-box p {{ margin: 8px 0; line-height: 1.6; }}
+                .footer {{ background: #0a0a0a; color: #999999; text-align: center; padding: 30px; font-size: 14px; }}
+                ul {{ padding-left: 20px; line-height: 1.8; }}
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="header">
+                    <h1>BOOKING CONFIRMED</h1>
+                    <p>We're Ready to Make Your Event Unforgettable</p>
                 </div>
 
-                <p><strong>What's Next?</strong></p>
-                <ul>
-                    <li>We'll reach out closer to the date to confirm details</li>
-                    <li>Feel free to send us your song requests anytime</li>
-                    <li>We'll arrive 30 minutes early for setup</li>
-                </ul>
+                <div class="content">
+                    <p>Hi {booking['client_name']},</p>
 
-                <p>We're excited to make your event amazing!</p>
+                    <p>Great news! Your booking with {self.business_name} is confirmed!</p>
 
-                <p><strong>Lucas & Emile</strong><br>{self.business_name}</p>
+                    <div class="info-box">
+                        <h3>Event Details</h3>
+                        <p><strong>Date:</strong> {booking['event_date']}</p>
+                        <p><strong>Time:</strong> {booking['event_time']}</p>
+                        <p><strong>Location:</strong> {booking['location']}</p>
+                    </div>
+
+                    <p><strong>What's Next?</strong></p>
+                    <ul>
+                        <li>We'll reach out closer to the date to confirm details</li>
+                        <li>Feel free to send us your song requests anytime</li>
+                        <li>We'll arrive 30 minutes early for setup</li>
+                    </ul>
+
+                    <p>We're excited to make your event amazing!</p>
+
+                    <p><strong>Lucas & Emile</strong><br>{self.business_name}</p>
+                </div>
+
+                <div class="footer">
+                    <p><strong style="color: #ffffff;">{self.business_name.upper()}</strong></p>
+                    <p>Professional DJ Services</p>
+                </div>
             </div>
         </body>
         </html>
