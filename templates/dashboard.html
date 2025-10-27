@@ -50,6 +50,32 @@
             position: relative;
         }
 
+        .header-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .logout-button {
+            padding: 12px 30px;
+            background: transparent;
+            color: #c62828;
+            text-decoration: none;
+            border: 2px solid #c62828;
+            border-radius: 6px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9em;
+            transition: all 0.3s;
+        }
+
+        .logout-button:hover {
+            background: #c62828;
+            color: white;
+            transform: translateY(-2px);
+        }
+
         .header h1 {
             font-size: 3em;
             font-weight: 700;
@@ -327,7 +353,10 @@
 </head>
 <body>
     <div class="header">
-        <a href="/" class="back-button">← Back to Home</a>
+        <div class="header-buttons">
+            <a href="/" class="back-button">← Back to Home</a>
+            <a href="/admin/logout" class="logout-button">Logout</a>
+        </div>
         <h1>Dashboard</h1>
         <p>Manage your bookings and track your business</p>
     </div>

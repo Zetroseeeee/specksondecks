@@ -4,14 +4,27 @@ Flask web application for handling bookings, quotes, and tracking
 Version: 2.0 - Professional Visual Design
 """
 
-from flask import Flask, render_template, request, jsonify, redirect, url_for
+from flask import Flask, render_template, request, jsonify, redirect, url_for, session
 from database import BookingDatabase
 from email_system import EmailSystem
 from datetime import datetime
 import os
+from functools import wraps
 
 app = Flask(__name__)
-app.secret_key = 'specks-on-decks-secret-key-change-this'
+app.secret_key = os.getenv('SECRET_KEY', 'specks-on-decks-secret-key-change-this-in-production')
+
+# Admin password from environment variable
+ADMIN_PASSWORD = os.getenv('ADMIN_PASSWORD', 'admin123')  # Default for local testing
+
+def login_required(f):
+    """Decorator to protect routes that require admin login"""
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not session.get('admin_logged_in'):
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    return decorated_function
 
 # Initialize database and email system
 db = BookingDatabase()
@@ -111,7 +124,34 @@ def submit_booking():
             'error': str(e)
         }), 400
 
+@app.route('/admin/login', methods=['GET'])
+def login():
+    """Admin login page"""
+    # If already logged in, redirect to dashboard
+    if session.get('admin_logged_in'):
+        return redirect(url_for('dashboard'))
+    return render_template('login.html')
+
+@app.route('/admin/login', methods=['POST'])
+def login_post():
+    """Handle admin login"""
+    data = request.json
+    password = data.get('password', '')
+
+    if password == ADMIN_PASSWORD:
+        session['admin_logged_in'] = True
+        return jsonify({'success': True})
+    else:
+        return jsonify({'success': False, 'error': 'Invalid password'}), 401
+
+@app.route('/admin/logout')
+def logout():
+    """Log out admin"""
+    session.pop('admin_logged_in', None)
+    return redirect(url_for('index'))
+
 @app.route('/dashboard')
+@login_required
 def dashboard():
     """Admin dashboard to view all bookings"""
     # Get all bookings
@@ -137,6 +177,7 @@ def dashboard():
                          pending_payments=pending_payments)
 
 @app.route('/booking/<int:booking_id>')
+@login_required
 def booking_detail(booking_id):
     """View details of a specific booking"""
     booking = db.get_booking(booking_id)
@@ -146,6 +187,7 @@ def booking_detail(booking_id):
     return render_template('booking_detail.html', booking=booking)
 
 @app.route('/api/update-status/<int:booking_id>', methods=['POST'])
+@login_required
 def update_status(booking_id):
     """Update booking status"""
     data = request.json
@@ -165,6 +207,7 @@ def update_status(booking_id):
     return jsonify({'success': True})
 
 @app.route('/api/update-payment/<int:booking_id>', methods=['POST'])
+@login_required
 def update_payment(booking_id):
     """Update payment information"""
     data = request.json
