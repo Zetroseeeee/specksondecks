@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Specks on Decks</title>
+    <title>Specks on Decks - Professional DJ Services</title>
     <style>
         * {
             margin: 0;
@@ -12,8 +12,8 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: #0a0a0a;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -22,24 +22,27 @@
         }
 
         .container {
-            max-width: 800px;
-            background: white;
-            border-radius: 20px;
-            padding: 60px 40px;
+            max-width: 1000px;
+            background: #ffffff;
+            border-radius: 2px;
+            padding: 80px 60px;
             text-align: center;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 2px 40px rgba(0,0,0,0.1);
         }
 
         h1 {
-            font-size: 3em;
-            color: #667eea;
-            margin-bottom: 10px;
+            font-size: 4em;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 15px;
+            letter-spacing: -2px;
         }
 
         .tagline {
-            font-size: 1.3em;
-            color: #666;
-            margin-bottom: 40px;
+            font-size: 1.4em;
+            color: #666666;
+            margin-bottom: 60px;
+            font-weight: 400;
         }
 
         .buttons {
@@ -47,124 +50,154 @@
             gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
-            margin: 40px 0;
+            margin: 60px 0;
         }
 
         .btn {
             display: inline-block;
-            padding: 20px 40px;
-            border-radius: 10px;
+            padding: 20px 50px;
+            border-radius: 2px;
             text-decoration: none;
-            font-size: 1.2em;
-            font-weight: bold;
-            transition: transform 0.2s;
+            font-size: 1.1em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
         }
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: #000000;
+            color: #ffffff;
+            border: 2px solid #000000;
+        }
+
+        .btn-primary:hover {
+            background: #ffffff;
+            color: #000000;
         }
 
         .btn-secondary {
-            background: white;
-            color: #667eea;
-            border: 2px solid #667eea;
+            background: #ffffff;
+            color: #000000;
+            border: 2px solid #000000;
+        }
+
+        .btn-secondary:hover {
+            background: #000000;
+            color: #ffffff;
         }
 
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 80px;
             text-align: left;
         }
 
         .feature {
-            padding: 25px;
-            background: #f9f9f9;
-            border-radius: 10px;
-        }
-
-        .feature-icon {
-            font-size: 2.5em;
-            margin-bottom: 15px;
+            padding: 30px;
+            background: #fafafa;
+            border-radius: 2px;
+            border-left: 3px solid #000000;
         }
 
         .feature h3 {
-            color: #667eea;
-            margin-bottom: 10px;
+            color: #000000;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .feature p {
-            color: #666;
-            line-height: 1.6;
+            color: #666666;
+            line-height: 1.7;
+            font-size: 1em;
         }
 
         .footer {
-            margin-top: 50px;
-            padding-top: 30px;
-            border-top: 2px solid #eee;
-            color: #999;
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid #e0e0e0;
+            color: #999999;
+        }
+
+        .footer p {
+            margin: 5px 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 60px 40px;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🎧 Specks on Decks</h1>
+        <h1>SPECKS ON DECKS</h1>
         <p class="tagline">Professional DJ Services for Your Special Events</p>
 
         <div class="buttons">
-            <a href="/book" class="btn btn-primary">Book Now - Get Instant Quote</a>
+            <a href="/book" class="btn btn-primary">Get Instant Quote</a>
             <a href="/dashboard" class="btn btn-secondary">Admin Dashboard</a>
         </div>
 
         <div class="features">
             <div class="feature">
-                <div class="feature-icon">💯</div>
-                <h3>Flat Rate Pricing</h3>
-                <p>£100 base rate with transparent add-on options. No hidden fees.</p>
+                <h3>Transparent Pricing</h3>
+                <p>£100 base rate with clear add-on options. No hidden fees, no surprises. What you see is what you pay.</p>
             </div>
 
             <div class="feature">
-                <div class="feature-icon">⚡</div>
                 <h3>Instant Quotes</h3>
-                <p>Fill out the form and get your quote immediately via email.</p>
+                <p>Fill out our booking form and receive your quote immediately via email. No waiting, no back-and-forth.</p>
             </div>
 
             <div class="feature">
-                <div class="feature-icon">🎉</div>
                 <h3>Premium Services</h3>
-                <p>Lighting, security, and after party services available.</p>
+                <p>Professional lighting, security personnel, and exclusive after party coordination available.</p>
             </div>
 
             <div class="feature">
-                <div class="feature-icon">🎵</div>
-                <h3>Professional DJ</h3>
-                <p>Lucas brings the energy with the perfect mix for your event.</p>
+                <h3>Expert DJ</h3>
+                <p>Lucas delivers exceptional performances with the perfect mix tailored to your event and audience.</p>
             </div>
 
             <div class="feature">
-                <div class="feature-icon">📅</div>
-                <h3>Easy Booking</h3>
-                <p>Simple online form. We handle all the details.</p>
+                <h3>Simple Booking</h3>
+                <p>Streamlined online process. We handle all details so you can focus on your event.</p>
             </div>
 
             <div class="feature">
-                <div class="feature-icon">✉️</div>
-                <h3>Automated Updates</h3>
-                <p>Receive confirmations and reminders automatically.</p>
+                <h3>Automated Service</h3>
+                <p>Receive confirmations, reminders, and updates automatically. Professional service, simplified.</p>
             </div>
         </div>
 
         <div class="footer">
-            <p><strong>Specks on Decks</strong></p>
+            <p><strong>SPECKS ON DECKS</strong></p>
             <p>Making your events unforgettable</p>
-            <p style="margin-top: 10px; font-size: 0.9em;">Lucas (DJ) & Emile (Management)</p>
+            <p style="margin-top: 15px; font-size: 0.95em;">Lucas (DJ) & Emile (Management)</p>
         </div>
     </div>
 </body>
