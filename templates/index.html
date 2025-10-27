@@ -13,192 +13,379 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-            background: #0a0a0a;
+            background: #000000;
+            color: #ffffff;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                        url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=1600') center/cover;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1000px;
-            background: #ffffff;
-            border-radius: 2px;
-            padding: 80px 60px;
             text-align: center;
-            box-shadow: 0 2px 40px rgba(0,0,0,0.1);
+            padding: 40px 20px;
         }
 
-        h1 {
-            font-size: 4em;
-            font-weight: 700;
-            color: #000000;
-            margin-bottom: 15px;
-            letter-spacing: -2px;
+        .hero-content {
+            max-width: 900px;
         }
 
-        .tagline {
-            font-size: 1.4em;
-            color: #666666;
-            margin-bottom: 60px;
-            font-weight: 400;
+        .hero h1 {
+            font-size: 6em;
+            font-weight: 900;
+            margin-bottom: 30px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 20px rgba(0,0,0,0.5);
         }
 
-        .buttons {
+        .hero .tagline {
+            font-size: 1.8em;
+            font-weight: 300;
+            margin-bottom: 50px;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
             display: flex;
             gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
-            margin: 60px 0;
         }
 
         .btn {
-            display: inline-block;
             padding: 20px 50px;
-            border-radius: 2px;
-            text-decoration: none;
             font-size: 1.1em;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
+            border-radius: 6px;
+            text-decoration: none;
             transition: all 0.3s;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: inline-block;
         }
 
         .btn-primary {
-            background: #000000;
-            color: #ffffff;
-            border: 2px solid #000000;
+            background: #ffffff;
+            color: #000000;
         }
 
         .btn-primary:hover {
-            background: #ffffff;
-            color: #000000;
+            background: #000000;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255,255,255,0.3);
         }
 
         .btn-secondary {
-            background: #ffffff;
-            color: #000000;
-            border: 2px solid #000000;
+            background: transparent;
+            color: #ffffff;
+            border: 2px solid #ffffff;
         }
 
         .btn-secondary:hover {
+            background: #ffffff;
+            color: #000000;
+            transform: translateY(-3px);
+        }
+
+        /* Features Section */
+        .features-section {
+            background: #ffffff;
+            color: #000000;
+            padding: 120px 40px;
+        }
+
+        .features-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3.5em;
+            font-weight: 900;
+            margin-bottom: 80px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: #fafafa;
+            padding: 50px 40px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: #000000;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 4em;
+            margin-bottom: 25px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.6em;
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .feature-card p {
+            color: #666666;
+            line-height: 1.8;
+            font-size: 1.1em;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
             background: #000000;
             color: #ffffff;
+            padding: 120px 40px;
+            text-align: center;
         }
 
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-            margin-top: 80px;
-            text-align: left;
+        .pricing-content {
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .feature {
-            padding: 30px;
-            background: #fafafa;
-            border-radius: 2px;
-            border-left: 3px solid #000000;
-        }
-
-        .feature h3 {
-            color: #000000;
-            margin-bottom: 15px;
-            font-size: 1.2em;
-            font-weight: 700;
+        .pricing-section h2 {
+            font-size: 3.5em;
+            font-weight: 900;
+            margin-bottom: 40px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 2px;
         }
 
-        .feature p {
+        .price-display {
+            font-size: 6em;
+            font-weight: 900;
+            margin: 40px 0;
+            line-height: 1;
+        }
+
+        .price-subtext {
+            font-size: 1.4em;
+            color: #cccccc;
+            margin-bottom: 50px;
+        }
+
+        .addons-list {
+            text-align: left;
+            max-width: 500px;
+            margin: 50px auto;
+            font-size: 1.2em;
+            line-height: 2;
+        }
+
+        .addons-list li {
+            list-style: none;
+            padding: 10px 0;
+            border-bottom: 1px solid #333333;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: #ffffff;
+            padding: 100px 40px;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 3.5em;
+            font-weight: 900;
+            color: #000000;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .cta-section p {
+            font-size: 1.4em;
             color: #666666;
-            line-height: 1.7;
-            font-size: 1em;
+            margin-bottom: 50px;
         }
 
+        /* Footer */
         .footer {
-            margin-top: 80px;
-            padding-top: 40px;
-            border-top: 1px solid #e0e0e0;
+            background: #0a0a0a;
             color: #999999;
+            padding: 60px 40px;
+            text-align: center;
         }
 
-        .footer p {
-            margin: 5px 0;
+        .footer strong {
+            color: #ffffff;
+            font-size: 1.3em;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 60px 40px;
+            .hero h1 {
+                font-size: 3em;
             }
 
-            h1 {
+            .hero .tagline {
+                font-size: 1.3em;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
                 font-size: 2.5em;
             }
 
-            .buttons {
+            .price-display {
+                font-size: 4em;
+            }
+
+            .hero-buttons {
                 flex-direction: column;
             }
 
             .btn {
                 width: 100%;
             }
+
+            .features-section, .pricing-section, .cta-section {
+                padding: 60px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2em;
+                letter-spacing: 2px;
+            }
+
+            .section-title {
+                font-size: 2em;
+            }
+
+            .feature-card {
+                padding: 30px 25px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>SPECKS ON DECKS</h1>
-        <p class="tagline">Professional DJ Services for Your Special Events</p>
-
-        <div class="buttons">
-            <a href="/book" class="btn btn-primary">Get Instant Quote</a>
-            <a href="/dashboard" class="btn btn-secondary">Admin Dashboard</a>
-        </div>
-
-        <div class="features">
-            <div class="feature">
-                <h3>Transparent Pricing</h3>
-                <p>£100 base rate with clear add-on options. No hidden fees, no surprises. What you see is what you pay.</p>
-            </div>
-
-            <div class="feature">
-                <h3>Instant Quotes</h3>
-                <p>Fill out our booking form and receive your quote immediately via email. No waiting, no back-and-forth.</p>
-            </div>
-
-            <div class="feature">
-                <h3>Premium Services</h3>
-                <p>Professional lighting, security personnel, and exclusive after party coordination available.</p>
-            </div>
-
-            <div class="feature">
-                <h3>Expert DJ</h3>
-                <p>Lucas delivers exceptional performances with the perfect mix tailored to your event and audience.</p>
-            </div>
-
-            <div class="feature">
-                <h3>Simple Booking</h3>
-                <p>Streamlined online process. We handle all details so you can focus on your event.</p>
-            </div>
-
-            <div class="feature">
-                <h3>Automated Service</h3>
-                <p>Receive confirmations, reminders, and updates automatically. Professional service, simplified.</p>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>SPECKS ON DECKS</h1>
+            <p class="tagline">Professional DJ Services<br>Making Your Events Unforgettable</p>
+            <div class="hero-buttons">
+                <a href="/book" class="btn btn-primary">Get Instant Quote</a>
+                <a href="/dashboard" class="btn btn-secondary">Admin Dashboard</a>
             </div>
         </div>
+    </section>
 
-        <div class="footer">
-            <p><strong>SPECKS ON DECKS</strong></p>
-            <p>Making your events unforgettable</p>
-            <p style="margin-top: 15px; font-size: 0.95em;">Lucas (DJ) & Emile (Management)</p>
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="features-container">
+            <h2 class="section-title">Why Choose Us</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎵</div>
+                    <h3>Expert DJ</h3>
+                    <p>Lucas brings years of experience and the perfect music selection tailored to your event</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Instant Quotes</h3>
+                    <p>Get your custom quote immediately via email - no waiting, no hassle</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💎</div>
+                    <h3>Premium Service</h3>
+                    <p>Professional lighting, security, and after-party coordination available</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💯</div>
+                    <h3>Transparent Pricing</h3>
+                    <p>Clear, upfront pricing with no hidden fees or surprise charges</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Easy Booking</h3>
+                    <p>Simple online booking process with automated confirmations and reminders</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔥</div>
+                    <h3>Unforgettable Vibes</h3>
+                    <p>We create the perfect atmosphere that keeps your guests dancing all night</p>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section">
+        <div class="pricing-content">
+            <h2>Starting From</h2>
+            <div class="price-display">£100</div>
+            <p class="price-subtext">Base rate with transparent add-on pricing</p>
+
+            <ul class="addons-list">
+                <li>✓ Professional DJ Performance</li>
+                <li>✓ Custom Music Selection</li>
+                <li>✓ Professional Equipment</li>
+                <li>✓ Event Coordination</li>
+            </ul>
+
+            <p style="margin-top: 40px; font-size: 1.2em; color: #cccccc;">
+                + Optional lighting, security, and after-party services
+            </p>
+
+            <a href="/book" class="btn btn-primary" style="margin-top: 50px;">Book Now</a>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Ready to Book?</h2>
+        <p>Get your instant quote and secure your date today</p>
+        <a href="/book" class="btn btn-primary">Get Started</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <strong>SPECKS ON DECKS</strong>
+        <p>Professional DJ Services</p>
+        <p style="margin-top: 20px;">Lucas (DJ) & Emile (Management)</p>
+    </footer>
 </body>
 </html>
