@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Specks on Decks</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            background: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-size: 1.3em;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 40px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 20px 40px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+            text-align: left;
+        }
+
+        .feature {
+            padding: 25px;
+            background: #f9f9f9;
+            border-radius: 10px;
+        }
+
+        .feature-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .feature h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .footer {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #eee;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎧 Specks on Decks</h1>
+        <p class="tagline">Professional DJ Services for Your Special Events</p>
+
+        <div class="buttons">
+            <a href="/book" class="btn btn-primary">Book Now - Get Instant Quote</a>
+            <a href="/dashboard" class="btn btn-secondary">Admin Dashboard</a>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">💯</div>
+                <h3>Flat Rate Pricing</h3>
+                <p>£100 base rate with transparent add-on options. No hidden fees.</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <h3>Instant Quotes</h3>
+                <p>Fill out the form and get your quote immediately via email.</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">🎉</div>
+                <h3>Premium Services</h3>
+                <p>Lighting, security, and after party services available.</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">🎵</div>
+                <h3>Professional DJ</h3>
+                <p>Lucas brings the energy with the perfect mix for your event.</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">📅</div>
+                <h3>Easy Booking</h3>
+                <p>Simple online form. We handle all the details.</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">✉️</div>
+                <h3>Automated Updates</h3>
+                <p>Receive confirmations and reminders automatically.</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>Specks on Decks</strong></p>
+            <p>Making your events unforgettable</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">Lucas (DJ) & Emile (Management)</p>
+        </div>
+    </div>
+</body>
+</html>

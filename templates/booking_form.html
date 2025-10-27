@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Specks on Decks - Get Your Quote</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .addon-section {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .addon-section h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        #quote-preview {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+            display: none;
+        }
+
+        #quote-preview h3 {
+            margin-bottom: 15px;
+        }
+
+        .quote-line {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .quote-total {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid rgba(255,255,255,0.5);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            margin-top: 10px;
+        }
+
+        .security-hours {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .afterparty-note {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            color: #856404;
+            display: none;
+        }
+
+        .success-message {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎧 Specks on Decks</h1>
+        <p class="subtitle">Get your instant quote & book your event</p>
+
+        <div id="success-message" class="success-message"></div>
+        <div id="error-message" class="error-message"></div>
+
+        <form id="booking-form">
+            <!-- Client Information -->
+            <div class="form-group">
+                <label for="client_name">Your Name *</label>
+                <input type="text" id="client_name" name="client_name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="client_email">Email Address *</label>
+                <input type="email" id="client_email" name="client_email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="client_phone">Phone Number</label>
+                <input type="tel" id="client_phone" name="client_phone">
+            </div>
+
+            <!-- Event Details -->
+            <div class="form-group">
+                <label for="event_type">Type of Event *</label>
+                <input type="text" id="event_type" name="event_type" placeholder="e.g., 18th Birthday, Private Party" required>
+            </div>
+
+            <div class="form-group">
+                <label for="event_date">Event Date *</label>
+                <input type="date" id="event_date" name="event_date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="event_time">Event Time *</label>
+                <input type="time" id="event_time" name="event_time" required>
+            </div>
+
+            <div class="form-group">
+                <label for="location">Event Location/Venue *</label>
+                <input type="text" id="location" name="location" required>
+            </div>
+
+            <div class="form-group">
+                <label for="guest_count">Expected Guest Count *</label>
+                <input type="number" id="guest_count" name="guest_count" min="1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="hours">Number of Hours *</label>
+                <input type="number" id="hours" name="hours" min="1" step="0.5" required>
+            </div>
+
+            <div class="form-group">
+                <label for="travel_cost">Travel Cost (in £)</label>
+                <input type="number" id="travel_cost" name="travel_cost" min="0" step="0.01" value="0" placeholder="Enter 0 if local">
+            </div>
+
+            <!-- Add-ons -->
+            <div class="addon-section">
+                <h3>Optional Add-Ons</h3>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="add_lighting" name="add_lighting">
+                    <label for="add_lighting">Lighting (+£75)</label>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="add_security" name="add_security">
+                    <label for="add_security">Security (£25/hour)</label>
+                </div>
+
+                <div id="security-hours-input" class="security-hours">
+                    <label for="security_hours">Hours of Security Needed</label>
+                    <input type="number" id="security_hours" name="security_hours" min="1" step="0.5" value="1">
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="add_afterparty" name="add_afterparty">
+                    <label for="add_afterparty">After Party Service (until 3am)</label>
+                </div>
+
+                <div id="afterparty-note" class="afterparty-note">
+                    <strong>After Party Service:</strong> Venue rental, setup, and coordination until 3am. Custom quote will be provided via phone call.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="notes">Additional Notes or Requests</label>
+                <textarea id="notes" name="notes" rows="4"></textarea>
+            </div>
+
+            <!-- Quote Preview -->
+            <div id="quote-preview">
+                <h3>Your Quote</h3>
+                <div class="quote-line">
+                    <span>DJ Service (Base Rate):</span>
+                    <span>£<span id="preview-base">100.00</span></span>
+                </div>
+                <div class="quote-line" id="preview-travel-line">
+                    <span>Travel Cost:</span>
+                    <span>£<span id="preview-travel">0.00</span></span>
+                </div>
+                <div class="quote-line" id="preview-lighting-line" style="display: none;">
+                    <span>Lighting:</span>
+                    <span>£<span id="preview-lighting">0.00</span></span>
+                </div>
+                <div class="quote-line" id="preview-security-line" style="display: none;">
+                    <span>Security:</span>
+                    <span>£<span id="preview-security">0.00</span></span>
+                </div>
+                <div class="quote-total">
+                    <div class="quote-line">
+                        <span>TOTAL:</span>
+                        <span>£<span id="preview-total">100.00</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" class="btn" onclick="calculateQuote()">Calculate Quote</button>
+            <button type="submit" class="btn" id="submit-btn" disabled>Submit Booking Request</button>
+        </form>
+    </div>
+
+    <script>
+        let currentQuote = null;
+
+        // Show/hide security hours input
+        document.getElementById('add_security').addEventListener('change', function() {
+            document.getElementById('security-hours-input').style.display = this.checked ? 'block' : 'none';
+        });
+
+        // Show/hide afterparty note
+        document.getElementById('add_afterparty').addEventListener('change', function() {
+            document.getElementById('afterparty-note').style.display = this.checked ? 'block' : 'none';
+        });
+
+        async function calculateQuote() {
+            // Get form data
+            const formData = {
+                travel_cost: parseFloat(document.getElementById('travel_cost').value) || 0,
+                add_lighting: document.getElementById('add_lighting').checked,
+                add_security: document.getElementById('add_security').checked,
+                security_hours: document.getElementById('add_security').checked ?
+                    parseFloat(document.getElementById('security_hours').value) || 0 : 0,
+                add_afterparty: document.getElementById('add_afterparty').checked
+            };
+
+            try {
+                const response = await fetch('/api/quote', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(formData)
+                });
+
+                const quote = await response.json();
+                currentQuote = quote;
+
+                // Update preview
+                document.getElementById('preview-base').textContent = quote.base_price.toFixed(2);
+                document.getElementById('preview-travel').textContent = quote.travel_cost.toFixed(2);
+
+                // Lighting
+                if (quote.lighting_cost > 0) {
+                    document.getElementById('preview-lighting-line').style.display = 'flex';
+                    document.getElementById('preview-lighting').textContent = quote.lighting_cost.toFixed(2);
+                } else {
+                    document.getElementById('preview-lighting-line').style.display = 'none';
+                }
+
+                // Security
+                if (quote.security_cost > 0) {
+                    document.getElementById('preview-security-line').style.display = 'flex';
+                    document.getElementById('preview-security').textContent = quote.security_cost.toFixed(2);
+                } else {
+                    document.getElementById('preview-security-line').style.display = 'none';
+                }
+
+                document.getElementById('preview-total').textContent = quote.total.toFixed(2);
+
+                // Show quote preview
+                document.getElementById('quote-preview').style.display = 'block';
+                document.getElementById('submit-btn').disabled = false;
+
+            } catch (error) {
+                console.error('Error:', error);
+                showError('Error calculating quote. Please try again.');
+            }
+        }
+
+        document.getElementById('booking-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            if (!currentQuote) {
+                showError('Please calculate your quote first!');
+                return;
+            }
+
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+
+            // Collect all form data
+            const formData = {
+                client_name: document.getElementById('client_name').value,
+                client_email: document.getElementById('client_email').value,
+                client_phone: document.getElementById('client_phone').value,
+                event_type: document.getElementById('event_type').value,
+                event_date: document.getElementById('event_date').value,
+                event_time: document.getElementById('event_time').value,
+                location: document.getElementById('location').value,
+                guest_count: document.getElementById('guest_count').value,
+                hours: document.getElementById('hours').value,
+                travel_cost: document.getElementById('travel_cost').value,
+                notes: document.getElementById('notes').value,
+                quote: currentQuote
+            };
+
+            try {
+                const response = await fetch('/api/submit-booking', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showSuccess('Booking request submitted! Check your email for the quote.');
+                    setTimeout(() => window.location.href = '/thank-you', 2000);
+                } else {
+                    showError(result.error || 'Error submitting booking. Please try again.');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Submit Booking Request';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showError('Error submitting booking. Please try again.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Booking Request';
+            }
+        });
+
+        function showSuccess(message) {
+            const el = document.getElementById('success-message');
+            el.textContent = message;
+            el.style.display = 'block';
+            setTimeout(() => el.style.display = 'none', 5000);
+        }
+
+        function showError(message) {
+            const el = document.getElementById('error-message');
+            el.textContent = message;
+            el.style.display = 'block';
+            setTimeout(() => el.style.display = 'none', 5000);
+        }
+    </script>
+</body>
+</html>

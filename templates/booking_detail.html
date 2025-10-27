@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking #{{ booking.id }} - Specks on Decks</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .back-link {
+            color: white;
+            text-decoration: none;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .badge {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .badge.inquiry {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .badge.confirmed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .badge.completed {
+            background: #e2e3e5;
+            color: #383d41;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .info-item {
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .info-item label {
+            display: block;
+            color: #666;
+            font-size: 0.85em;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .info-item .value {
+            font-size: 1.1em;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .quote-breakdown {
+            background: #f0f4ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .quote-line {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .quote-total {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #667eea;
+        }
+
+        .payment-section {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .payment-section input {
+            width: 150px;
+            padding: 8px;
+            margin: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 5px;
+            transition: opacity 0.3s;
+        }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .alert.warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .alert.success {
+            background: #d4edda;
+            color: #155724;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="/dashboard" class="back-link">← Back to Dashboard</a>
+            <h1>Booking #{{ booking.id }}
+                <span class="badge {{ booking.status }}">{{ booking.status.upper() }}</span>
+            </h1>
+            <p>{{ booking.event_type }} - {{ booking.client_name }}</p>
+        </div>
+
+        <!-- Client Information -->
+        <div class="section">
+            <h2>Client Information</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <label>Name</label>
+                    <div class="value">{{ booking.client_name }}</div>
+                </div>
+                <div class="info-item">
+                    <label>Email</label>
+                    <div class="value">{{ booking.client_email }}</div>
+                </div>
+                <div class="info-item">
+                    <label>Phone</label>
+                    <div class="value">{{ booking.client_phone or 'Not provided' }}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Event Details -->
+        <div class="section">
+            <h2>Event Details</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <label>Event Type</label>
+                    <div class="value">{{ booking.event_type }}</div>
+                </div>
+                <div class="info-item">
+                    <label>Date</label>
+                    <div class="value">{{ booking.event_date }}</div>
+                </div>
+                <div class="info-item">
+                    <label>Time</label>
+                    <div class="value">{{ booking.event_time }}</div>
+                </div>
+                <div class="info-item">
+                    <label>Location</label>
+                    <div class="value">{{ booking.location }}</div>
+                </div>
+                <div class="info-item">
+                    <label>Guest Count</label>
+                    <div class="value">{{ booking.guest_count }}</div>
+                </div>
+                <div class="info-item">
+                    <label>Duration</label>
+                    <div class="value">{{ booking.hours }} hours</div>
+                </div>
+            </div>
+
+            {% if booking.notes %}
+            <div style="margin-top: 20px;">
+                <label style="color: #666; font-size: 0.85em;">NOTES</label>
+                <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; margin-top: 5px;">
+                    {{ booking.notes }}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Quote Breakdown -->
+        <div class="section">
+            <h2>Quote Breakdown</h2>
+            <div class="quote-breakdown">
+                <div class="quote-line">
+                    <span>DJ Service (Base Rate):</span>
+                    <span>£{{ "%.2f"|format(booking.base_price) }}</span>
+                </div>
+                {% if booking.travel_cost > 0 %}
+                <div class="quote-line">
+                    <span>Travel Cost:</span>
+                    <span>£{{ "%.2f"|format(booking.travel_cost) }}</span>
+                </div>
+                {% endif %}
+                {% if booking.has_lighting %}
+                <div class="quote-line">
+                    <span>Lighting:</span>
+                    <span>£{{ "%.2f"|format(booking.lighting_cost) }}</span>
+                </div>
+                {% endif %}
+                {% if booking.has_security %}
+                <div class="quote-line">
+                    <span>Security ({{ booking.security_hours }} hours):</span>
+                    <span>£{{ "%.2f"|format(booking.security_cost) }}</span>
+                </div>
+                {% endif %}
+                <div class="quote-total">
+                    <div class="quote-line">
+                        <span>TOTAL QUOTE:</span>
+                        <span>£{{ "%.2f"|format(booking.total_quote) }}</span>
+                    </div>
+                </div>
+            </div>
+
+            {% if booking.has_afterparty %}
+            <div class="alert warning">
+                <strong>⭐ After Party Service Requested</strong><br>
+                Custom quote required - arrange via phone call
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Payment Tracking -->
+        <div class="section">
+            <h2>Payment Tracking</h2>
+            <div class="payment-section">
+                <p><strong>Total Quote:</strong> £{{ "%.2f"|format(booking.total_quote) }}</p>
+                <p><strong>Deposit Paid:</strong> £{{ "%.2f"|format(booking.deposit_paid) }}</p>
+                <p><strong>Balance Paid:</strong> £{{ "%.2f"|format(booking.balance_paid) }}</p>
+                <p><strong>Outstanding:</strong> £{{ "%.2f"|format(booking.total_quote - booking.deposit_paid - booking.balance_paid) }}</p>
+                <p style="margin-top: 10px;">
+                    <strong>Payment Status:</strong>
+                    <span class="badge {{ booking.payment_status }}">{{ booking.payment_status.upper() }}</span>
+                </p>
+
+                <div style="margin-top: 20px;">
+                    <h3 style="margin-bottom: 10px;">Update Payment</h3>
+                    <form id="payment-form">
+                        <label>Deposit: £</label>
+                        <input type="number" id="deposit" step="0.01" value="{{ booking.deposit_paid }}">
+                        <label>Balance: £</label>
+                        <input type="number" id="balance" step="0.01" value="{{ booking.balance_paid }}">
+                        <br>
+                        <button type="submit" class="btn btn-primary">Update Payment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="section">
+            <h2>Actions</h2>
+            {% if booking.status == 'inquiry' %}
+                <button class="btn btn-success" onclick="updateStatus('confirmed')">Confirm Booking</button>
+                <button class="btn btn-danger" onclick="updateStatus('cancelled')">Cancel</button>
+            {% elif booking.status == 'confirmed' %}
+                <button class="btn btn-secondary" onclick="updateStatus('completed')">Mark as Completed</button>
+                <button class="btn btn-danger" onclick="updateStatus('cancelled')">Cancel</button>
+            {% endif %}
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <p style="color: #999; font-size: 0.9em;">
+                Created: {{ booking.created_at }}<br>
+                Last Updated: {{ booking.updated_at }}
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function updateStatus(newStatus) {
+            if (!confirm(`Are you sure you want to change status to ${newStatus}?`)) {
+                return;
+            }
+
+            fetch('/api/update-status/{{ booking.id }}', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({status: newStatus})
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Status updated successfully!');
+                    location.reload();
+                } else {
+                    alert('Error updating status');
+                }
+            });
+        }
+
+        document.getElementById('payment-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const deposit = parseFloat(document.getElementById('deposit').value) || 0;
+            const balance = parseFloat(document.getElementById('balance').value) || 0;
+
+            fetch('/api/update-payment/{{ booking.id }}', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({deposit, balance})
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Payment updated successfully!');
+                    location.reload();
+                } else {
+                    alert('Error updating payment');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
