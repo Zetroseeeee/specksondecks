@@ -21,7 +21,7 @@
         .hero {
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
                         url('/static/images/dj-booth.jpg') center/cover;
-            min-height: 50vh;
+            min-height: 40vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -67,106 +67,123 @@
             font-weight: 300;
         }
 
-        /* Gallery Section */
-        .gallery-section {
+        /* Gallery Container */
+        .gallery-container {
+            display: flex;
+            min-height: calc(100vh - 40vh);
             background: #ffffff;
-            color: #000000;
-            padding: 100px 40px;
         }
 
-        .gallery-container {
-            max-width: 1400px;
-            margin: 0 auto;
+        /* Sidebar */
+        .sidebar {
+            width: 300px;
+            background: #fafafa;
+            border-right: 2px solid #e0e0e0;
+            padding: 40px 0;
+        }
+
+        .sidebar h2 {
+            font-size: 1.5em;
+            font-weight: 900;
+            color: #000000;
+            padding: 0 30px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .event-list {
+            list-style: none;
+        }
+
+        .event-item {
+            padding: 20px 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 4px solid transparent;
+            color: #333333;
+            font-weight: 600;
+        }
+
+        .event-item:hover {
+            background: #ffffff;
+            border-left-color: #666666;
+        }
+
+        .event-item.active {
+            background: #ffffff;
+            border-left-color: #000000;
+            color: #000000;
+        }
+
+        .event-count {
+            display: block;
+            font-size: 0.85em;
+            color: #999999;
+            font-weight: 400;
+            margin-top: 5px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 60px 40px;
+            background: #ffffff;
+            color: #000000;
+            overflow-y: auto;
         }
 
         .event-title {
-            text-align: center;
-            font-size: 2.5em;
+            font-size: 3em;
             font-weight: 900;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
 
-        .event-subtitle {
-            text-align: center;
+        .event-date {
             font-size: 1.2em;
             color: #666666;
-            margin-bottom: 60px;
+            margin-bottom: 50px;
         }
 
-        .gallery-grid {
+        .photo-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
         }
 
-        .gallery-item {
+        .photo-item {
             overflow: hidden;
             border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             transition: all 0.3s;
             cursor: pointer;
+            background: #f5f5f5;
         }
 
-        .gallery-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        .photo-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
-        .gallery-item img {
+        .photo-item img {
             width: 100%;
-            height: 400px;
+            height: 350px;
             object-fit: cover;
             display: block;
             transition: transform 0.3s;
         }
 
-        .gallery-item:hover img {
+        .photo-item:hover img {
             transform: scale(1.05);
         }
 
-        /* CTA Section */
-        .cta-section {
-            background: #000000;
-            padding: 100px 40px;
+        .loading {
             text-align: center;
-        }
-
-        .cta-section h2 {
-            font-size: 3.5em;
-            font-weight: 900;
-            color: #ffffff;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-        }
-
-        .cta-section p {
-            font-size: 1.4em;
-            color: #cccccc;
-            margin-bottom: 50px;
-        }
-
-        .btn {
-            padding: 20px 50px;
-            font-size: 1.1em;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-radius: 6px;
-            text-decoration: none;
-            transition: all 0.3s;
-            display: inline-block;
-            background: #ffffff;
-            color: #000000;
-            border: 2px solid #ffffff;
-        }
-
-        .btn:hover {
-            background: #000000;
-            color: #ffffff;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255,255,255,0.3);
+            padding: 60px;
+            color: #999999;
+            font-size: 1.2em;
         }
 
         /* Footer */
@@ -185,24 +202,45 @@
         }
 
         /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 3em;
+        @media (max-width: 968px) {
+            .gallery-container {
+                flex-direction: column;
             }
 
-            .gallery-grid {
-                grid-template-columns: 1fr;
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 2px solid #e0e0e0;
+                padding: 30px 0;
+            }
+
+            .event-list {
+                display: flex;
+                overflow-x: auto;
+                padding-bottom: 10px;
+            }
+
+            .event-item {
+                white-space: nowrap;
+                border-left: none;
+                border-bottom: 4px solid transparent;
+            }
+
+            .event-item.active {
+                border-left: none;
+                border-bottom-color: #000000;
+            }
+
+            .hero h1 {
+                font-size: 3em;
             }
 
             .event-title {
                 font-size: 2em;
             }
 
-            .back-button {
-                top: 20px;
-                left: 20px;
-                padding: 10px 20px;
-                font-size: 0.8em;
+            .photo-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -212,8 +250,19 @@
                 letter-spacing: 2px;
             }
 
-            .gallery-item img {
-                height: 300px;
+            .back-button {
+                top: 20px;
+                left: 20px;
+                padding: 10px 20px;
+                font-size: 0.8em;
+            }
+
+            .main-content {
+                padding: 40px 20px;
+            }
+
+            .photo-item img {
+                height: 250px;
             }
         }
     </style>
@@ -224,63 +273,34 @@
         <a href="/" class="back-button">← Back</a>
         <div>
             <h1>GALLERY</h1>
-            <p>See Our Work in Action</p>
+            <p>Browse Our Events</p>
         </div>
     </section>
 
-    <!-- Gallery Section -->
-    <section class="gallery-section">
-        <div class="gallery-container">
+    <!-- Gallery Container -->
+    <div class="gallery-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>Events</h2>
+            <ul class="event-list" id="event-list">
+                <li class="event-item active" data-event="emmies-18th">
+                    Emmie's 18th Birthday
+                    <span class="event-count">241 photos</span>
+                </li>
+                <!-- More events can be added here in the future -->
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="main-content">
             <h2 class="event-title">Emmie's 18th Birthday</h2>
-            <p class="event-subtitle">One of our recent events - bringing the vibes all night long</p>
+            <p class="event-date">Recent Event • 241 Photos</p>
 
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="/static/images/gallery/gallery-1.jpg" alt="Event Photo 1">
-                </div>
-                <div class="gallery-item">
-                    <img src="/static/images/gallery/gallery-2.jpg" alt="Event Photo 2">
-                </div>
-                <div class="gallery-item">
-                    <img src="/static/images/gallery/gallery-3.jpg" alt="Event Photo 3">
-                </div>
-                <div class="gallery-item">
-                    <img src="/static/images/gallery/gallery-4.jpg" alt="Event Photo 4">
-                </div>
-                <div class="gallery-item">
-                    <img src="/static/images/gallery/gallery-5.jpg" alt="Event Photo 5">
-                </div>
-                <div class="gallery-item">
-                    <img src="/static/images/gallery/gallery-6.jpg" alt="Event Photo 6">
-                </div>
-                <div class="gallery-item">
-                    <img src="/static/images/gallery/gallery-7.jpg" alt="Event Photo 7">
-                </div>
-                <div class="gallery-item">
-                    <img src="/static/images/gallery/gallery-8.jpg" alt="Event Photo 8">
-                </div>
-                <div class="gallery-item">
-                    <img src="/static/images/gallery/gallery-9.jpg" alt="Event Photo 9">
-                </div>
-                <div class="gallery-item">
-                    <img src="/static/images/gallery/gallery-10.jpg" alt="Event Photo 10">
-                </div>
-                <div class="gallery-item">
-                    <img src="/static/images/gallery/gallery-11.jpg" alt="Event Photo 11">
-                </div>
-                <div class="gallery-item">
-                    <img src="/static/images/gallery/gallery-12.jpg" alt="Event Photo 12">
-                </div>
+            <div class="photo-grid" id="photo-grid">
+                <!-- Photos will be loaded here -->
             </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <h2>Ready to Book Your Event?</h2>
-        <p>Let's make your party unforgettable</p>
-        <a href="/book" class="btn">Get Your Quote</a>
-    </section>
+        </main>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -295,5 +315,121 @@
             <p style="margin: 8px 0;">📸 <a href="https://instagram.com/thespecksondecks" target="_blank" style="color: #cccccc; text-decoration: none;">@thespecksondecks</a></p>
         </div>
     </footer>
+
+    <script>
+        // Event data
+        const events = {
+            'emmies-18th': {
+                title: "Emmie's 18th Birthday",
+                date: "Recent Event",
+                count: 241,
+                photos: []
+            }
+        };
+
+        // Generate photo filenames for Emmie's 18th
+        const emmiesPhotos = [
+            '_X3A0004.jpg', '_X3A0005.jpg', '_X3A0010.jpg', '_X3A0012.jpg', '_X3A0013.jpg',
+            '_X3A0019.jpg', '_X3A0020.jpg', '_X3A0022.jpg', '_X3A0023.jpg', '_X3A0027.jpg',
+            '_X3A0033.jpg', '_X3A0036.jpg', '_X3A0037.jpg', '_X3A0038.jpg', '_X3A0044.jpg',
+            '_X3A0045.jpg', '_X3A0046.jpg', '_X3A0048.jpg', '_X3A0049.jpg', '_X3A0054.jpg',
+            '_X3A0060.jpg', '_X3A0067.jpg', '_X3A0068.jpg', '_X3A0080.jpg', '_X3A0082.jpg',
+            '_X3A0083.jpg', '_X3A0085.jpg', '_X3A0088.jpg', '_X3A0089.jpg', '_X3A0090.jpg',
+            '_X3A0111.jpg', '_X3A0113.jpg', '_X3A0118.jpg', '_X3A0123.jpg', '_X3A0124.jpg',
+            '_X3A0128.jpg', '_X3A0131.jpg', '_X3A0132.jpg', '_X3A0133.jpg', '_X3A0139.jpg',
+            '_X3A0148.jpg', '_X3A0157.jpg', '_X3A0163.jpg', '_X3A0168.jpg', '_X3A0169.jpg',
+            '_X3A0170.jpg', '_X3A0174.jpg', '_X3A0176.jpg', '_X3A0181.jpg', '_X3A0182.jpg',
+            '_X3A0190.jpg', '_X3A0192.jpg', '_X3A0201.jpg', '_X3A0213.jpg', '_X3A0217.jpg',
+            '_X3A0218.jpg', '_X3A0221.jpg', '_X3A0235.jpg', '_X3A0238.jpg', '_X3A0239.jpg',
+            '_X3A0243.jpg', '_X3A0266.jpg', '_X3A0267.jpg', '_X3A0273.jpg', '_X3A0275.jpg',
+            '_X3A0276.jpg', '_X3A0282.jpg', '_X3A0296.jpg', '_X3A0297.jpg', '_X3A0303.jpg',
+            '_X3A0304.jpg', '_X3A0305.jpg', '_X3A0306.jpg', '_X3A0313.jpg', '_X3A0317.jpg',
+            '_X3A0318.jpg', '_X3A0330.jpg', '_X3A0342.jpg', '_X3A0345.jpg', '_X3A0346.jpg',
+            '_X3A0351.jpg', '_X3A0353.jpg', '_X3A0364.jpg', '_X3A0365.jpg', '_X3A0366.jpg',
+            '_X3A0372.jpg', '_X3A0377.jpg', '_X3A0380.jpg', '_X3A0382.jpg', '_X3A0391.jpg',
+            '_X3A0395.jpg', '_X3A0396.jpg', '_X3A0397.jpg', '_X3A0398.jpg', '_X3A0401.jpg',
+            '_X3A0403.jpg', '_X3A0414.jpg', '_X3A0415.jpg', '_X3A0416.jpg', '_X3A0420.jpg',
+            '_X3A0421.jpg', '_X3A0423.jpg', '_X3A0425.jpg', '_X3A0426.jpg', '_X3A0433.jpg',
+            '_X3A0435.jpg', '_X3A0437.jpg', '_X3A0438.jpg', '_X3A0442.jpg', '_X3A0443.jpg',
+            '_X3A0444.jpg', '_X3A0447.jpg', '_X3A0448.jpg', '_X3A0449.jpg', '_X3A0450.jpg',
+            '_X3A0455.jpg', '_X3A0465.jpg', '_X3A0477.jpg', '_X3A0486.jpg', '_X3A0490.jpg',
+            '_X3A0491.jpg', '_X3A0492.jpg', '_X3A0494.jpg', '_X3A0495.jpg', '_X3A0519.jpg',
+            '_X3A0520.jpg', '_X3A0527.jpg', '_X3A0528.jpg', '_X3A0535.jpg', '_X3A0537.jpg',
+            '_X3A0548.jpg', '_X3A0552.jpg', '_X3A0561.jpg', '_X3A0563.jpg', '_X3A0564.jpg',
+            '_X3A0576.jpg', '_X3A0583.jpg', '_X3A0587.jpg', '_X3A0588.jpg', '_X3A0590.jpg',
+            '_X3A0598.jpg', '_X3A0602.jpg', '_X3A0606.jpg', '_X3A0612.jpg', '_X3A0615.jpg',
+            '_X3A0618.jpg', '_X3A0619.jpg', '_X3A0621.jpg', '_X3A0629.jpg', '_X3A0635.jpg',
+            '_X3A0638.jpg', '_X3A0639.jpg', '_X3A0660.jpg', '_X3A0663.jpg', '_X3A0675.jpg',
+            '_X3A0689.jpg', '_X3A0690.jpg', '_X3A0693.jpg', '_X3A0696.jpg', '_X3A0698.jpg',
+            '_X3A0700.jpg', '_X3A0702.jpg', '_X3A0709.jpg', '_X3A0713.jpg', '_X3A0714.jpg',
+            '_X3A0718.jpg', '_X3A0719.jpg', '_X3A0721.jpg', '_X3A0724.jpg', '_X3A0727.jpg',
+            '_X3A0731.jpg', '_X3A0733.jpg', '_X3A0745.jpg', '_X3A0747.jpg', '_X3A0755.jpg',
+            '_X3A0763.jpg', '_X3A0764.jpg', '_X3A0770.jpg', '_X3A0773.jpg', '_X3A0774.jpg',
+            '_X3A0775.jpg', '_X3A0785.jpg', '_X3A0790.jpg', '_X3A0791.jpg', '_X3A0799.jpg',
+            '_X3A0806.jpg', '_X3A0807.jpg', '_X3A0810.jpg', '_X3A0811.jpg', '_X3A0817.jpg',
+            '_X3A0818.jpg', '_X3A0824.jpg', '_X3A0825.jpg', '_X3A0832.jpg', '_X3A0833.jpg',
+            '_X3A0838.jpg', '_X3A0852.jpg', '_X3A0855.jpg', '_X3A0863.jpg', '_X3A0864.jpg',
+            '_X3A0881.jpg', '_X3A0886.jpg', '_X3A0887.jpg', '_X3A0893.jpg', '_X3A0924.jpg',
+            '_X3A0932.jpg', '_X3A0934.jpg', '_X3A0937.jpg', '_X3A0941.jpg', '_X3A0969.jpg',
+            '_X3A0975.jpg', '_X3A0988.jpg', '_X3A1004.jpg', '_X3A1005.jpg', '_X3A1010.jpg',
+            '_X3A1018.jpg', '_X3A1023.jpg', '_X3A1043.jpg', '_X3A1064.jpg', '_X3A1097.jpg',
+            '_X3A1103.jpg', '_X3A1105.jpg', '_X3A1106.jpg', '_X3A1107.jpg', '_X3A1116.jpg',
+            '_X3A1146.jpg', '_X3A1161.jpg', '_X3A1162.jpg', '_X3A1166.jpg', '_X3A1167.jpg',
+            '_X3A1193.jpg', '_X3A1197.jpg', '_X3A1204.jpg', '_X3A1210.jpg', '_X3A1213.jpg',
+            '_X3A1216.jpg', '_X3A1218.jpg', '_X3A1221.jpg', '_X3A1223.jpg', '_X3A1224.jpg',
+            '_X3A1226.jpg'
+        ];
+
+        events['emmies-18th'].photos = emmiesPhotos.map(filename =>
+            `/static/images/events/emmies-18th/${filename}`
+        );
+
+        let currentEvent = 'emmies-18th';
+
+        function loadEvent(eventId) {
+            const event = events[eventId];
+            if (!event) return;
+
+            currentEvent = eventId;
+
+            // Update title
+            document.querySelector('.event-title').textContent = event.title;
+            document.querySelector('.event-date').textContent = `${event.date} • ${event.count} Photos`;
+
+            // Update active state in sidebar
+            document.querySelectorAll('.event-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.dataset.event === eventId) {
+                    item.classList.add('active');
+                }
+            });
+
+            // Load photos
+            const photoGrid = document.getElementById('photo-grid');
+            photoGrid.innerHTML = '<div class="loading">Loading photos...</div>';
+
+            // Simulate loading (in case of many photos)
+            setTimeout(() => {
+                photoGrid.innerHTML = '';
+                event.photos.forEach((photoUrl, index) => {
+                    const photoItem = document.createElement('div');
+                    photoItem.className = 'photo-item';
+                    photoItem.innerHTML = `<img src="${photoUrl}" alt="Photo ${index + 1}" loading="lazy">`;
+                    photoGrid.appendChild(photoItem);
+                });
+            }, 100);
+        }
+
+        // Event listeners
+        document.querySelectorAll('.event-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const eventId = item.dataset.event;
+                loadEvent(eventId);
+            });
+        });
+
+        // Load initial event
+        loadEvent('emmies-18th');
+    </script>
 </body>
 </html>
