@@ -42,6 +42,7 @@ class BookingDatabase:
                 has_lighting INTEGER DEFAULT 0,
                 has_security INTEGER DEFAULT 0,
                 has_afterparty INTEGER DEFAULT 0,
+                afterparty_details TEXT,
 
                 -- Status tracking
                 status TEXT DEFAULT 'inquiry',
@@ -74,6 +75,24 @@ class BookingDatabase:
         conn.commit()
         conn.close()
 
+        # Run migrations
+        self.run_migrations()
+
+    def run_migrations(self):
+        """Run database migrations for schema updates"""
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+
+        # Check if afterparty_details column exists, add if not
+        try:
+            cursor.execute("SELECT afterparty_details FROM bookings LIMIT 1")
+        except sqlite3.OperationalError:
+            # Column doesn't exist, add it
+            cursor.execute("ALTER TABLE bookings ADD COLUMN afterparty_details TEXT")
+            conn.commit()
+
+        conn.close()
+
     def add_booking(self, booking_data):
         """Add a new booking inquiry"""
         conn = sqlite3.connect(self.db_path)
@@ -87,9 +106,9 @@ class BookingDatabase:
                 event_type, event_date, event_time, location,
                 guest_count, hours,
                 base_price, travel_cost, lighting_cost, security_cost, security_hours,
-                total_quote, has_lighting, has_security, has_afterparty,
+                total_quote, has_lighting, has_security, has_afterparty, afterparty_details,
                 status, payment_status, created_at, updated_at, notes
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', (
             booking_data['client_name'],
             booking_data['client_email'],
@@ -109,6 +128,7 @@ class BookingDatabase:
             booking_data.get('has_lighting', 0),
             booking_data.get('has_security', 0),
             booking_data.get('has_afterparty', 0),
+            booking_data.get('afterparty_details', ''),
             'inquiry',
             'pending',
             now,

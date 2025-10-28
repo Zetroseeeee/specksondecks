@@ -64,11 +64,21 @@ class EmailSystem:
 
         afterparty_note = ""
         if booking_data.get('has_afterparty'):
-            afterparty_note = """
-            <div style="background-color: #f5f5f5; padding: 20px; border-radius: 2px; margin-top: 20px; border-left: 4px solid #000000;">
-                <strong style="font-size: 1.1em; text-transform: uppercase; letter-spacing: 0.5px;">After Party Service Requested</strong><br><br>
-                Venue rental, setup & coordination until 3am<br>
-                <em>Custom quote will be provided via phone call</em>
+            afterparty_details = booking_data.get('afterparty_details', '')
+            details_html = ""
+            if afterparty_details:
+                details_html = f"""
+                <div style="background-color: #ffffff; padding: 15px; margin: 15px 0; border-left: 3px solid #000000;">
+                    <strong>Your Requirements:</strong><br>
+                    <p style="margin: 10px 0; line-height: 1.6; white-space: pre-wrap;">{afterparty_details}</p>
+                </div>
+                """
+            afterparty_note = f"""
+            <div style="background-color: #fff9e6; padding: 20px; border-radius: 2px; margin-top: 20px; border-left: 4px solid #000000;">
+                <strong style="font-size: 1.1em; text-transform: uppercase; letter-spacing: 0.5px;">⭐ After Party Service Requested</strong><br><br>
+                {details_html}
+                <p style="margin-top: 15px;"><strong>📱 We'll call you to discuss a custom quote and finalize the details.</strong></p>
+                <p style="margin-top: 8px; font-size: 0.9em; color: #666;">Note: After party service is not included in the quote above and requires separate pricing.</p>
             </div>
             """
 
@@ -203,6 +213,19 @@ class EmailSystem:
                         <p><strong>Location:</strong> {booking_data['location']}</p>
                         <p><strong>Guests:</strong> {booking_data['guest_count']}</p>
                     </div>
+
+                    {"" if not booking_data.get('has_afterparty') else f'''
+                    <div style="background-color: #fff9e6; padding: 20px; border-left: 4px solid #000000; margin: 20px 0;">
+                        <p><strong style="font-size: 1.2em; color: #000000;">⭐ AFTER PARTY SERVICE REQUESTED</strong></p>
+                        {"" if not booking_data.get('afterparty_details') else f'''
+                        <div style="background: #ffffff; padding: 15px; margin: 15px 0; border-left: 3px solid #000000;">
+                            <p><strong>Client Requirements:</strong></p>
+                            <p style="margin: 10px 0; line-height: 1.6; white-space: pre-wrap;">{booking_data.get('afterparty_details', '')}</p>
+                        </div>
+                        '''}
+                        <p style="margin-top: 15px; color: #000; font-weight: 700;">📱 ACTION REQUIRED: Call client to discuss custom quote</p>
+                    </div>
+                    '''}
 
                     <div class="quote-total">Quote: £{booking_data['total_quote']:.2f}</div>
 

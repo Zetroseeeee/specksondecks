@@ -265,6 +265,142 @@
                 height: 250px;
             }
         }
+
+        /* Lightbox Modal */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 4px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            font-size: 2em;
+            cursor: pointer;
+            font-weight: 300;
+            border-radius: 50%;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10001;
+        }
+
+        .lightbox-close:hover {
+            background: #000000;
+            color: #ffffff;
+            transform: rotate(90deg);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            font-size: 2em;
+            cursor: pointer;
+            font-weight: 700;
+            border-radius: 50%;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10001;
+        }
+
+        .lightbox-nav:hover {
+            background: #000000;
+            color: #ffffff;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .lightbox-prev {
+            left: 30px;
+        }
+
+        .lightbox-next {
+            right: 30px;
+        }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            color: #000000;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1em;
+            z-index: 10001;
+        }
+
+        @media (max-width: 768px) {
+            .lightbox-close, .lightbox-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1.5em;
+            }
+
+            .lightbox-close {
+                top: 15px;
+                right: 15px;
+            }
+
+            .lightbox-prev {
+                left: 15px;
+            }
+
+            .lightbox-next {
+                right: 15px;
+            }
+
+            .lightbox-counter {
+                bottom: 15px;
+                font-size: 0.9em;
+                padding: 8px 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -300,6 +436,17 @@
                 <!-- Photos will be loaded here -->
             </div>
         </main>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightbox-close">&times;</button>
+        <button class="lightbox-nav lightbox-prev" id="lightbox-prev">‹</button>
+        <button class="lightbox-nav lightbox-next" id="lightbox-next">›</button>
+        <div class="lightbox-content">
+            <img class="lightbox-image" id="lightbox-image" src="" alt="Full size photo">
+        </div>
+        <div class="lightbox-counter" id="lightbox-counter">1 / 241</div>
     </div>
 
     <!-- Footer -->
@@ -385,12 +532,73 @@
         );
 
         let currentEvent = 'emmies-18th';
+        let currentPhotoIndex = 0;
+        let currentPhotos = [];
+
+        // Lightbox elements
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightbox-image');
+        const lightboxCounter = document.getElementById('lightbox-counter');
+        const lightboxClose = document.getElementById('lightbox-close');
+        const lightboxPrev = document.getElementById('lightbox-prev');
+        const lightboxNext = document.getElementById('lightbox-next');
+
+        function openLightbox(index) {
+            currentPhotoIndex = index;
+            updateLightbox();
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function updateLightbox() {
+            if (currentPhotos.length === 0) return;
+
+            lightboxImage.src = currentPhotos[currentPhotoIndex];
+            lightboxCounter.textContent = `${currentPhotoIndex + 1} / ${currentPhotos.length}`;
+        }
+
+        function nextPhoto() {
+            currentPhotoIndex = (currentPhotoIndex + 1) % currentPhotos.length;
+            updateLightbox();
+        }
+
+        function prevPhoto() {
+            currentPhotoIndex = (currentPhotoIndex - 1 + currentPhotos.length) % currentPhotos.length;
+            updateLightbox();
+        }
+
+        // Lightbox event listeners
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightboxNext.addEventListener('click', nextPhoto);
+        lightboxPrev.addEventListener('click', prevPhoto);
+
+        // Close on background click
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowRight') nextPhoto();
+            if (e.key === 'ArrowLeft') prevPhoto();
+        });
 
         function loadEvent(eventId) {
             const event = events[eventId];
             if (!event) return;
 
             currentEvent = eventId;
+            currentPhotos = event.photos;
 
             // Update title
             document.querySelector('.event-title').textContent = event.title;
@@ -415,6 +623,7 @@
                     const photoItem = document.createElement('div');
                     photoItem.className = 'photo-item';
                     photoItem.innerHTML = `<img src="${photoUrl}" alt="Photo ${index + 1}" loading="lazy">`;
+                    photoItem.addEventListener('click', () => openLightbox(index));
                     photoGrid.appendChild(photoItem);
                 });
             }, 100);

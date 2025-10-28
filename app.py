@@ -100,6 +100,7 @@ def submit_booking():
             'has_lighting': 1 if data['quote']['lighting_cost'] > 0 else 0,
             'has_security': 1 if data['quote']['security_cost'] > 0 else 0,
             'has_afterparty': 1 if data['quote'].get('has_afterparty') else 0,
+            'afterparty_details': data.get('afterparty_details', ''),
             'notes': data.get('notes', '')
         }
 

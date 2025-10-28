@@ -353,9 +353,18 @@
             </div>
 
             {% if booking.has_afterparty %}
-            <div class="alert warning">
-                <strong>⭐ After Party Service Requested</strong><br>
-                Custom quote required - arrange via phone call
+            <div class="alert warning" style="background: #fff9e6; border-left-color: #000000;">
+                <strong style="font-size: 1.2em; display: block; margin-bottom: 15px;">⭐ AFTER PARTY SERVICE REQUESTED</strong>
+
+                {% if booking.afterparty_details %}
+                <div style="background: #ffffff; padding: 15px; margin: 15px 0; border-left: 3px solid #000000;">
+                    <strong style="display: block; margin-bottom: 8px; color: #000000;">Client Requirements:</strong>
+                    <p style="color: #333; line-height: 1.6; margin: 0; white-space: pre-wrap;">{{ booking.afterparty_details }}</p>
+                </div>
+                {% endif %}
+
+                <p style="margin-top: 15px; font-weight: 700;">📱 <strong>ACTION REQUIRED:</strong> Call client to discuss custom quote and finalize details</p>
+                <p style="margin-top: 8px; color: #666; font-size: 0.95em;">After party service is not included in the current quote total and requires separate pricing.</p>
             </div>
             {% endif %}
         </div>
