@@ -188,6 +188,36 @@
             font-size: 1.2em;
         }
 
+        .load-more-btn {
+            grid-column: 1 / -1;
+            width: 100%;
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 20px 40px;
+            background: #000000;
+            color: #ffffff;
+            border: 2px solid #000000;
+            font-size: 1.1em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 4px;
+        }
+
+        .load-more-btn:hover:not(:disabled) {
+            background: #ffffff;
+            color: #000000;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .load-more-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
         /* Footer */
         .footer {
             background: #0a0a0a;
@@ -537,7 +567,7 @@
         let currentPhotoIndex = 0;
         let currentPhotos = [];
         let loadedPhotoCount = 0;
-        const BATCH_SIZE = 20; // Load 20 photos at a time
+        const BATCH_SIZE = 50; // Load 50 photos at a time
         let isLoading = false;
 
         // Lightbox elements
@@ -608,9 +638,21 @@
             const startIndex = loadedPhotoCount;
             const endIndex = Math.min(loadedPhotoCount + BATCH_SIZE, event.photos.length);
 
-            if (startIndex >= event.photos.length) return;
+            if (startIndex >= event.photos.length) {
+                // All photos loaded
+                const loadMoreBtn = document.getElementById('load-more-btn');
+                if (loadMoreBtn) loadMoreBtn.remove();
+                return;
+            }
 
             isLoading = true;
+
+            // Update button text
+            const loadMoreBtn = document.getElementById('load-more-btn');
+            if (loadMoreBtn) {
+                loadMoreBtn.textContent = `Loading...`;
+                loadMoreBtn.disabled = true;
+            }
 
             // Load next batch
             for (let i = startIndex; i < endIndex; i++) {
@@ -623,17 +665,21 @@
             }
 
             loadedPhotoCount = endIndex;
-            isLoading = false;
 
-            // Update loading indicator
-            const loadingDiv = photoGrid.querySelector('.loading');
-            if (loadingDiv) {
-                if (loadedPhotoCount >= event.photos.length) {
-                    loadingDiv.remove();
-                } else {
-                    loadingDiv.textContent = `Loaded ${loadedPhotoCount} of ${event.photos.length} photos...`;
+            // Small delay to allow images to start loading
+            setTimeout(() => {
+                isLoading = false;
+
+                // Update or remove button
+                if (loadMoreBtn) {
+                    if (loadedPhotoCount >= event.photos.length) {
+                        loadMoreBtn.remove();
+                    } else {
+                        loadMoreBtn.textContent = `Load More (${loadedPhotoCount} / ${event.photos.length})`;
+                        loadMoreBtn.disabled = false;
+                    }
                 }
-            }
+            }, 100);
         }
 
         function loadEvent(eventId) {
@@ -656,13 +702,27 @@
                 }
             });
 
-            // Clear grid and add loading indicator
+            // Clear grid
             const photoGrid = document.getElementById('photo-grid');
-            photoGrid.innerHTML = '<div class="loading">Loading photos...</div>';
+            photoGrid.innerHTML = '';
+
+            // Add Load More button
+            const loadMoreBtn = document.createElement('button');
+            loadMoreBtn.id = 'load-more-btn';
+            loadMoreBtn.className = 'load-more-btn';
+            loadMoreBtn.textContent = `Load More (0 / ${event.photos.length})`;
+            loadMoreBtn.onclick = loadMorePhotos;
+            photoGrid.appendChild(loadMoreBtn);
 
             // Load first batch immediately
             setTimeout(() => {
                 loadMorePhotos();
+                // Auto-load second batch for faster initial experience
+                setTimeout(() => {
+                    if (loadedPhotoCount < event.photos.length) {
+                        loadMorePhotos();
+                    }
+                }, 500);
             }, 50);
         }
 
@@ -672,8 +732,8 @@
             const scrollPosition = mainContent.scrollTop + mainContent.clientHeight;
             const scrollHeight = mainContent.scrollHeight;
 
-            // Load more when 500px from bottom
-            if (scrollPosition >= scrollHeight - 500 && !isLoading) {
+            // Load more when 800px from bottom
+            if (scrollPosition >= scrollHeight - 800 && !isLoading && loadedPhotoCount < currentPhotos.length) {
                 loadMorePhotos();
             }
         });
