@@ -12,8 +12,8 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: #ffffff;
             padding: 20px;
         }
 
@@ -23,10 +23,10 @@
         }
 
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #000000;
             color: white;
             padding: 30px;
-            border-radius: 10px;
+            border-radius: 0;
             margin-bottom: 30px;
         }
 
@@ -35,54 +35,66 @@
             text-decoration: none;
             margin-bottom: 10px;
             display: inline-block;
+            transition: opacity 0.3s;
         }
 
         .back-link:hover {
-            text-decoration: underline;
+            opacity: 0.7;
         }
 
         .section {
-            background: white;
+            background: #fafafa;
             padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 0;
+            border-left: 4px solid #000000;
             margin-bottom: 20px;
         }
 
         h1 {
             font-size: 2em;
             margin-bottom: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         h2 {
-            color: #667eea;
+            color: #000000;
             margin-bottom: 20px;
             padding-bottom: 10px;
-            border-bottom: 2px solid #eee;
+            border-bottom: 2px solid #000000;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .badge {
             padding: 5px 15px;
-            border-radius: 20px;
+            border-radius: 0;
             font-size: 0.85em;
-            font-weight: bold;
+            font-weight: 800;
             display: inline-block;
             margin-left: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .badge.inquiry {
-            background: #fff3cd;
-            color: #856404;
+            background: #ffffff;
+            color: #000000;
+            border: 2px solid #000000;
         }
 
         .badge.confirmed {
-            background: #d4edda;
-            color: #155724;
+            background: #000000;
+            color: #ffffff;
+            border: 2px solid #000000;
         }
 
         .badge.completed {
-            background: #e2e3e5;
-            color: #383d41;
+            background: #666666;
+            color: #ffffff;
+            border: 2px solid #666666;
         }
 
         .info-grid {
@@ -94,8 +106,9 @@
 
         .info-item {
             padding: 15px;
-            background: #f9f9f9;
-            border-radius: 8px;
+            background: #ffffff;
+            border-radius: 0;
+            border-left: 3px solid #000000;
         }
 
         .info-item label {
@@ -104,99 +117,135 @@
             font-size: 0.85em;
             margin-bottom: 5px;
             text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
         .info-item .value {
             font-size: 1.1em;
-            color: #333;
-            font-weight: bold;
+            color: #000000;
+            font-weight: 700;
         }
 
         .quote-breakdown {
-            background: #f0f4ff;
+            background: #ffffff;
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 0;
             margin: 20px 0;
+            border-left: 3px solid #000000;
         }
 
         .quote-line {
             display: flex;
             justify-content: space-between;
             padding: 10px 0;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #e0e0e0;
+            font-weight: 600;
         }
 
         .quote-total {
             font-size: 1.5em;
-            font-weight: bold;
-            color: #667eea;
+            font-weight: 900;
+            color: #000000;
             margin-top: 15px;
             padding-top: 15px;
-            border-top: 2px solid #667eea;
+            border-top: 3px solid #000000;
         }
 
         .payment-section {
-            background: #fff3cd;
+            background: #fafafa;
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 0;
+            border-left: 3px solid #000000;
         }
 
         .payment-section input {
             width: 150px;
-            padding: 8px;
+            padding: 10px;
             margin: 5px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            border: 2px solid #000000;
+            border-radius: 0;
+            font-family: inherit;
+            font-weight: 600;
         }
 
         .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
+            padding: 12px 25px;
+            border: 2px solid #000000;
+            border-radius: 0;
             cursor: pointer;
             font-size: 1em;
             margin: 5px;
-            transition: opacity 0.3s;
+            transition: all 0.3s;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .btn:hover {
-            opacity: 0.8;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
         .btn-primary {
-            background: #667eea;
+            background: #000000;
             color: white;
+        }
+
+        .btn-primary:hover {
+            background: #ffffff;
+            color: #000000;
         }
 
         .btn-success {
-            background: #28a745;
+            background: #000000;
             color: white;
+        }
+
+        .btn-success:hover {
+            background: #ffffff;
+            color: #000000;
         }
 
         .btn-danger {
-            background: #dc3545;
-            color: white;
+            background: #ffffff;
+            color: #000000;
+            border: 2px solid #000000;
+        }
+
+        .btn-danger:hover {
+            background: #000000;
+            color: #ffffff;
         }
 
         .btn-secondary {
-            background: #6c757d;
+            background: #666666;
             color: white;
+            border: 2px solid #666666;
+        }
+
+        .btn-secondary:hover {
+            background: #ffffff;
+            color: #000000;
+            border: 2px solid #000000;
         }
 
         .alert {
             padding: 15px;
-            border-radius: 8px;
+            border-radius: 0;
             margin: 20px 0;
+            border-left: 3px solid #000000;
+            font-weight: 600;
         }
 
         .alert.warning {
-            background: #fff3cd;
-            color: #856404;
+            background: #fafafa;
+            color: #000000;
         }
 
         .alert.success {
-            background: #d4edda;
-            color: #155724;
+            background: #fafafa;
+            color: #000000;
         }
     </style>
 </head>
