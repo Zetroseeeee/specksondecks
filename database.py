@@ -72,6 +72,12 @@ class BookingDatabase:
             )
         ''')
 
+        # Create indexes for faster queries
+        cursor.execute('CREATE INDEX IF NOT EXISTS idx_bookings_status ON bookings(status)')
+        cursor.execute('CREATE INDEX IF NOT EXISTS idx_bookings_event_date ON bookings(event_date)')
+        cursor.execute('CREATE INDEX IF NOT EXISTS idx_bookings_created_at ON bookings(created_at)')
+        cursor.execute('CREATE INDEX IF NOT EXISTS idx_email_log_booking_id ON email_log(booking_id)')
+
         conn.commit()
         conn.close()
 

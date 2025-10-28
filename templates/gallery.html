@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View photos from our recent events. Professional DJ services by Specks on Decks.">
     <title>Gallery - Specks on Decks</title>
     <style>
         * {
@@ -169,10 +170,11 @@
 
         .photo-item img {
             width: 100%;
-            height: 350px;
+            height: 300px;
             object-fit: cover;
             display: block;
             transition: transform 0.3s;
+            image-rendering: -webkit-optimize-contrast;
         }
 
         .photo-item:hover img {
@@ -262,7 +264,7 @@
             }
 
             .photo-item img {
-                height: 250px;
+                height: 200px;
             }
         }
 
@@ -534,6 +536,9 @@
         let currentEvent = 'emmies-18th';
         let currentPhotoIndex = 0;
         let currentPhotos = [];
+        let loadedPhotoCount = 0;
+        const BATCH_SIZE = 20; // Load 20 photos at a time
+        let isLoading = false;
 
         // Lightbox elements
         const lightbox = document.getElementById('lightbox');
@@ -593,12 +598,51 @@
             if (e.key === 'ArrowLeft') prevPhoto();
         });
 
+        function loadMorePhotos() {
+            if (isLoading) return;
+
+            const event = events[currentEvent];
+            if (!event) return;
+
+            const photoGrid = document.getElementById('photo-grid');
+            const startIndex = loadedPhotoCount;
+            const endIndex = Math.min(loadedPhotoCount + BATCH_SIZE, event.photos.length);
+
+            if (startIndex >= event.photos.length) return;
+
+            isLoading = true;
+
+            // Load next batch
+            for (let i = startIndex; i < endIndex; i++) {
+                const photoUrl = event.photos[i];
+                const photoItem = document.createElement('div');
+                photoItem.className = 'photo-item';
+                photoItem.innerHTML = `<img src="${photoUrl}" alt="Photo ${i + 1}" loading="lazy">`;
+                photoItem.addEventListener('click', () => openLightbox(i));
+                photoGrid.appendChild(photoItem);
+            }
+
+            loadedPhotoCount = endIndex;
+            isLoading = false;
+
+            // Update loading indicator
+            const loadingDiv = photoGrid.querySelector('.loading');
+            if (loadingDiv) {
+                if (loadedPhotoCount >= event.photos.length) {
+                    loadingDiv.remove();
+                } else {
+                    loadingDiv.textContent = `Loaded ${loadedPhotoCount} of ${event.photos.length} photos...`;
+                }
+            }
+        }
+
         function loadEvent(eventId) {
             const event = events[eventId];
             if (!event) return;
 
             currentEvent = eventId;
             currentPhotos = event.photos;
+            loadedPhotoCount = 0;
 
             // Update title
             document.querySelector('.event-title').textContent = event.title;
@@ -612,22 +656,27 @@
                 }
             });
 
-            // Load photos
+            // Clear grid and add loading indicator
             const photoGrid = document.getElementById('photo-grid');
             photoGrid.innerHTML = '<div class="loading">Loading photos...</div>';
 
-            // Simulate loading (in case of many photos)
+            // Load first batch immediately
             setTimeout(() => {
-                photoGrid.innerHTML = '';
-                event.photos.forEach((photoUrl, index) => {
-                    const photoItem = document.createElement('div');
-                    photoItem.className = 'photo-item';
-                    photoItem.innerHTML = `<img src="${photoUrl}" alt="Photo ${index + 1}" loading="lazy">`;
-                    photoItem.addEventListener('click', () => openLightbox(index));
-                    photoGrid.appendChild(photoItem);
-                });
-            }, 100);
+                loadMorePhotos();
+            }, 50);
         }
+
+        // Infinite scroll - load more photos when scrolling near bottom
+        const mainContent = document.getElementById('main-content');
+        mainContent.addEventListener('scroll', () => {
+            const scrollPosition = mainContent.scrollTop + mainContent.clientHeight;
+            const scrollHeight = mainContent.scrollHeight;
+
+            // Load more when 500px from bottom
+            if (scrollPosition >= scrollHeight - 500 && !isLoading) {
+                loadMorePhotos();
+            }
+        });
 
         // Event listeners
         document.querySelectorAll('.event-item').forEach(item => {

@@ -5,6 +5,7 @@ Version: 2.0 - Professional Visual Design
 """
 
 from flask import Flask, render_template, request, jsonify, redirect, url_for, session
+from flask_compress import Compress
 from database import BookingDatabase
 from email_system import EmailSystem
 from datetime import datetime
@@ -13,6 +14,12 @@ from functools import wraps
 
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY', 'specks-on-decks-secret-key-change-this-in-production')
+
+# Enable compression for all responses
+Compress(app)
+
+# Configure caching for static files
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 31536000  # 1 year for static files
 
 # Admin password from environment variable
 ADMIN_PASSWORD = os.getenv('ADMIN_PASSWORD', 'admin123')  # Default for local testing
