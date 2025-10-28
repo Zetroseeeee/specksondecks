@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Specks on Decks</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: #000000;
+            color: #ffffff;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                        url('/static/images/dj-booth.jpg') center/cover;
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            padding: 12px 30px;
+            background: transparent;
+            color: white;
+            text-decoration: none;
+            border: 2px solid white;
+            border-radius: 6px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9em;
+            transition: all 0.3s;
+        }
+
+        .back-button:hover {
+            background: white;
+            color: black;
+            transform: translateY(-2px);
+        }
+
+        .hero h1 {
+            font-size: 5em;
+            font-weight: 900;
+            margin-bottom: 20px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 20px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            font-weight: 300;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            background: #ffffff;
+            color: #000000;
+            padding: 100px 40px;
+        }
+
+        .gallery-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .event-title {
+            text-align: center;
+            font-size: 2.5em;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .event-subtitle {
+            text-align: center;
+            font-size: 1.2em;
+            color: #666666;
+            margin-bottom: 60px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: #000000;
+            padding: 100px 40px;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 3.5em;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .cta-section p {
+            font-size: 1.4em;
+            color: #cccccc;
+            margin-bottom: 50px;
+        }
+
+        .btn {
+            padding: 20px 50px;
+            font-size: 1.1em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+            background: #ffffff;
+            color: #000000;
+            border: 2px solid #ffffff;
+        }
+
+        .btn:hover {
+            background: #000000;
+            color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255,255,255,0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: #0a0a0a;
+            color: #999999;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .footer strong {
+            color: #ffffff;
+            font-size: 1.3em;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3em;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .event-title {
+                font-size: 2em;
+            }
+
+            .back-button {
+                top: 20px;
+                left: 20px;
+                padding: 10px 20px;
+                font-size: 0.8em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2em;
+                letter-spacing: 2px;
+            }
+
+            .gallery-item img {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <a href="/" class="back-button">← Back</a>
+        <div>
+            <h1>GALLERY</h1>
+            <p>See Our Work in Action</p>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="gallery-container">
+            <h2 class="event-title">Emmie's 18th Birthday</h2>
+            <p class="event-subtitle">One of our recent events - bringing the vibes all night long</p>
+
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="/static/images/gallery/gallery-1.jpg" alt="Event Photo 1">
+                </div>
+                <div class="gallery-item">
+                    <img src="/static/images/gallery/gallery-2.jpg" alt="Event Photo 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="/static/images/gallery/gallery-3.jpg" alt="Event Photo 3">
+                </div>
+                <div class="gallery-item">
+                    <img src="/static/images/gallery/gallery-4.jpg" alt="Event Photo 4">
+                </div>
+                <div class="gallery-item">
+                    <img src="/static/images/gallery/gallery-5.jpg" alt="Event Photo 5">
+                </div>
+                <div class="gallery-item">
+                    <img src="/static/images/gallery/gallery-6.jpg" alt="Event Photo 6">
+                </div>
+                <div class="gallery-item">
+                    <img src="/static/images/gallery/gallery-7.jpg" alt="Event Photo 7">
+                </div>
+                <div class="gallery-item">
+                    <img src="/static/images/gallery/gallery-8.jpg" alt="Event Photo 8">
+                </div>
+                <div class="gallery-item">
+                    <img src="/static/images/gallery/gallery-9.jpg" alt="Event Photo 9">
+                </div>
+                <div class="gallery-item">
+                    <img src="/static/images/gallery/gallery-10.jpg" alt="Event Photo 10">
+                </div>
+                <div class="gallery-item">
+                    <img src="/static/images/gallery/gallery-11.jpg" alt="Event Photo 11">
+                </div>
+                <div class="gallery-item">
+                    <img src="/static/images/gallery/gallery-12.jpg" alt="Event Photo 12">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Ready to Book Your Event?</h2>
+        <p>Let's make your party unforgettable</p>
+        <a href="/book" class="btn">Get Your Quote</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <strong>SPECKS ON DECKS</strong>
+        <p>Professional DJ Services</p>
+        <p style="margin-top: 20px;">Lucas (DJ) & Emile (Management)</p>
+
+        <div style="margin-top: 30px; padding-top: 30px; border-top: 1px solid #333333;">
+            <p style="margin: 10px 0;"><strong>Get In Touch</strong></p>
+            <p style="margin: 8px 0;">📧 <a href="mailto:thespecksondecks@gmail.com" style="color: #cccccc; text-decoration: none;">thespecksondecks@gmail.com</a></p>
+            <p style="margin: 8px 0;">📱 <a href="https://wa.me/447482724053" style="color: #cccccc; text-decoration: none;">WhatsApp: +44 7482 724053</a></p>
+            <p style="margin: 8px 0;">📸 <a href="https://instagram.com/thespecksondecks" target="_blank" style="color: #cccccc; text-decoration: none;">@thespecksondecks</a></p>
+        </div>
+    </footer>
+</body>
+</html>

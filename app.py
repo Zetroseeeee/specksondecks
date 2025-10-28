@@ -40,6 +40,11 @@ def booking_form():
     """Display booking form"""
     return render_template('booking_form.html')
 
+@app.route('/gallery')
+def gallery():
+    """Display photo gallery"""
+    return render_template('gallery.html')
+
 @app.route('/api/quote', methods=['POST'])
 def calculate_quote():
     """Calculate quote based on form data"""
